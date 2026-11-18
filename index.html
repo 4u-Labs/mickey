@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Game &amp; Watch: Mickey Mouse (Nintendo MC-25, 1981)</title>
+  <link rel="stylesheet" href="style.css?v=20261111e" />
+</head>
+<body>
+  <!-- Topo Minimalista Discreto -->
+  <header class="top-bar">
+    <div class="brand-title">
+      <span class="badge-1981">MC-25 • 1981</span>
+      <h1>Game &amp; Watch: Mickey Mouse</h1>
+    </div>
+
+    <div class="status-inline">
+      <span><em class="label">Modo</em> <strong id="status-mode">Relógio</strong></span>
+      <span class="sep">•</span>
+      <span><em class="label">Pts</em> <strong id="status-score">0</strong></span>
+      <span class="sep">•</span>
+      <span><em class="label">Rec A</em> <strong id="status-hia">0</strong></span>
+      <span class="sep">•</span>
+      <span><em class="label">Rec B</em> <strong id="status-hib">0</strong></span>
+    </div>
+  </header>
+
+  <!-- Palco Principal do Console Portátil -->
+  <main id="console-stage">
+    <div class="console-wrapper">
+      <canvas id="gw-canvas" width="654" height="396"></canvas>
+      <div class="lcd-glass-sheen"></div>
+      <div id="hotspots-layer" aria-label="Botões físicos do console"></div>
+    </div>
+  </main>
+
+  <!-- Rodapé Ultra-Compacto e Discreto -->
+  <footer class="bottom-bar">
+    <div class="micro-toolbar">
+      <button id="btn-quick-a" class="micro-btn" title="Iniciar Game A (Tecla 1)">Game A</button>
+      <button id="btn-quick-b" class="micro-btn" title="Iniciar Game B (Tecla 2)">Game B</button>
+      <button id="btn-quick-time" class="micro-btn" title="Relógio / Demo (Tecla 3)">Time</button>
+      <button id="btn-quick-acl" class="micro-btn" title="Reset ACL (Tecla 5)">ACL</button>
+
+      <span class="divider"></span>
+
+      <button id="btn-toggle-sound" class="micro-btn active" title="Ligar/Desligar Som">🔊 Som</button>
+      <button id="btn-toggle-ghost" class="micro-btn active" title="Marca d'água dos segmentos LCD desligados">🔲 LCD</button>
+      <button id="btn-toggle-hints" class="micro-btn" title="Destacar áreas de toque no console">🎯 Botões</button>
+      <button id="btn-toggle-keys" class="micro-btn" title="Ver atalhos do teclado">⌨️ Teclas</button>
+      <button id="btn-fullscreen" class="micro-btn neon-fullscreen" title="Jogar em Tela Cheia Realista">
+        <span class="neon-text">⛶ Tela Cheia</span>
+      </button>
+    </div>
+
+    <div id="keys-popover" class="keys-hint" hidden>
+      <span>↖ Sup. Esq: <kbd>Q</kbd>/<kbd>7</kbd></span>
+      <span>↙ Inf. Esq: <kbd>A</kbd>/<kbd>1</kbd></span>
+      <span>↗ Sup. Dir: <kbd>P</kbd>/<kbd>9</kbd></span>
+      <span>↘ Inf. Dir: <kbd>L</kbd>/<kbd>3</kbd></span>
+      <span>Setas: <kbd>←</kbd><kbd>→</kbd> lado, <kbd>↑</kbd><kbd>↓</kbd> altura</span>
+      <span>Modos: <kbd>1</kbd> Game A, <kbd>2</kbd> Game B, <kbd>3</kbd> Time, <kbd>4</kbd> Alarm, <kbd>5</kbd> ACL</span>
+    </div>
+  </footer>
+
+  <script src="assets.js?v=20261111e"></script>
+  <script src="game.js?v=20261111e"></script>
+</body>
+</html>

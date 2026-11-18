@@ -1,0 +1,409 @@
+:root {
+  --bg-dark: #0e1014;
+  --text-light: #d1d5db;
+  --text-muted: #6b7280;
+  --accent-subtle: #9ca3af;
+}
+
+@property --neon-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html,
+body {
+  background: radial-gradient(circle at 50% 45%, #232730 0%, #0b0d11 85%);
+  color: var(--text-light);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  height: 100dvh;
+  max-height: 100dvh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  overflow: hidden;
+}
+
+/* Topo Minimalista e Discreto */
+.top-bar {
+  width: 100%;
+  max-width: 920px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 6px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+  transition: opacity 0.25s ease;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.top-bar:hover {
+  opacity: 0.95;
+}
+
+.brand-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge-1981 {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-title h1 {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--accent-subtle);
+  letter-spacing: 0.02em;
+}
+
+.status-inline {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.status-inline em.label {
+  font-style: normal;
+  color: var(--text-muted);
+  margin-right: 2px;
+}
+
+.status-inline strong {
+  color: var(--text-light);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.status-inline .sep {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* Palco Principal — O Console é a Estrela */
+#console-stage {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  padding: 4px 0;
+}
+
+#console-stage:fullscreen {
+  background: radial-gradient(circle at center, #23262f 0%, #090a0d 100%);
+  width: 100vw;
+  height: 100dvh;
+  padding: 10px;
+}
+
+.console-wrapper {
+  position: relative;
+  width: min(100%, calc(85dvh * (654 / 396)));
+  max-width: 980px;
+  aspect-ratio: 654 / 396;
+  filter:
+    drop-shadow(0 28px 52px rgba(0, 0, 0, 0.85))
+    drop-shadow(0 8px 18px rgba(0, 0, 0, 0.65));
+  transition: transform 0.25s ease, width 0.25s ease;
+}
+
+#console-stage:fullscreen .console-wrapper {
+  width: min(96vw, calc(92dvh * (654 / 396)));
+  max-width: none;
+}
+
+#gw-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Reflexo sutil do vidro sobre a tela LCD */
+.lcd-glass-sheen {
+  position: absolute;
+  left: 25.6%;
+  top: 24.2%;
+  width: 48.3%;
+  height: 51.5%;
+  pointer-events: none;
+  border-radius: 6px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.02) 38%,
+    rgba(0, 0, 0, 0.03) 65%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+/* Camada Interativa de Botões do Console */
+#hotspots-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.console-hotspot {
+  position: absolute;
+  pointer-events: auto;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.console-hotspot:hover {
+  border-color: rgba(255, 230, 150, 0.35);
+}
+
+#hotspots-layer.show-hints .console-hotspot {
+  border-color: rgba(255, 210, 80, 0.85);
+  background: rgba(255, 200, 50, 0.16);
+  box-shadow: 0 0 15px rgba(255, 200, 50, 0.45);
+}
+
+/* Rodapé Ultra-Compacto e Discreto */
+.bottom-bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.72;
+  transition: opacity 0.25s ease;
+  z-index: 10;
+}
+
+.bottom-bar:hover,
+.bottom-bar:focus-within {
+  opacity: 1;
+}
+
+.micro-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(20, 23, 30, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+  padding: 3px 8px;
+  backdrop-filter: blur(8px);
+}
+
+.divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 3px;
+}
+
+.micro-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 0.69rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.micro-btn:hover {
+  color: var(--text-light);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.micro-btn.active {
+  color: #b8c0cc;
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Botão Tela Cheia com Contorno Neon Animado (Feixe de Luz Percorrendo a Borda) */
+.micro-btn.neon-fullscreen {
+  position: relative;
+  padding: 4px 12px;
+  margin-left: 2px;
+  color: #f8fafc;
+  font-weight: 600;
+  border: none;
+  background:
+    linear-gradient(#13161d, #13161d) padding-box,
+    conic-gradient(
+      from var(--neon-angle),
+      rgba(0, 240, 255, 0.15) 0%,
+      #00f0ff 22%,
+      #ffd166 45%,
+      #ff3b30 65%,
+      rgba(0, 240, 255, 0.15) 85%,
+      rgba(0, 240, 255, 0.15) 100%
+    ) border-box;
+  border: 1.5px solid transparent;
+  box-shadow:
+    0 0 12px rgba(0, 240, 255, 0.25),
+    0 0 4px rgba(255, 209, 102, 0.2);
+  animation: neon-spin 3.2s linear infinite, neon-pulse 2.4s ease-in-out infinite alternate;
+}
+
+.micro-btn.neon-fullscreen:hover {
+  transform: scale(1.04);
+  box-shadow:
+    0 0 18px rgba(0, 240, 255, 0.5),
+    0 0 8px rgba(255, 209, 102, 0.45);
+}
+
+.neon-text {
+  background: linear-gradient(90deg, #e0faff 0%, #fff4d2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
+}
+
+@keyframes neon-spin {
+  to {
+    --neon-angle: 360deg;
+  }
+}
+
+@keyframes neon-pulse {
+  0% {
+    box-shadow:
+      0 0 8px rgba(0, 240, 255, 0.22),
+      0 0 3px rgba(255, 209, 102, 0.15);
+  }
+  100% {
+    box-shadow:
+      0 0 15px rgba(0, 240, 255, 0.45),
+      0 0 6px rgba(255, 59, 48, 0.3);
+  }
+}
+
+.keys-hint {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  background: rgba(17, 19, 24, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  z-index: 20;
+}
+
+.keys-hint[hidden] {
+  display: none;
+}
+
+kbd {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-family: monospace;
+  font-size: 0.68rem;
+  color: var(--text-light);
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    padding: 4px 6px;
+  }
+  .brand-title h1,
+  #btn-toggle-keys,
+  .divider {
+    display: none;
+  }
+  .top-bar {
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.66rem;
+  }
+  .badge-1981 {
+    font-size: 0.58rem;
+    padding: 1px 5px;
+  }
+  .status-inline {
+    font-size: 0.66rem;
+    gap: 5px;
+  }
+  .micro-toolbar {
+    padding: 3px 6px;
+    gap: 3px;
+  }
+  .micro-btn {
+    padding: 3px 7px;
+    font-size: 0.65rem;
+  }
+  .micro-btn.neon-fullscreen {
+    padding: 4px 10px;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  html,
+  body {
+    padding: 2px 6px;
+  }
+  .top-bar {
+    display: none;
+  }
+  .console-wrapper {
+    width: min(96vw, calc(89dvh * (654 / 396)));
+  }
+  .micro-toolbar {
+    padding: 2px 6px;
+  }
+  .micro-btn {
+    padding: 2px 6px;
+    font-size: 0.62rem;
+  }
+}
